@@ -16,5 +16,9 @@ $komentar=$_GET['komentar'];
 $query=$koneksi->prepare("insert into komentar(id,id_komentar,komentar) value('$id','$id_komentar','$tanda','$cover'");
 $hasil=$query->execute();
 
-header("index1.php");
+if($hasil){
+		header("location:index.php");
+	}else{
+		echo"Gagal Memasukan Data";
+	}
 ?>

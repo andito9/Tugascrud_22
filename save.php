@@ -26,11 +26,7 @@ if(isset($_POST['submit'])){
 	}else{
 		echo"Gagal Memasukan Data";
 	}
+}
 	
-	$lokasi_file=$_FILES[]
-	
-	
-	
-	}
 
 ?>

@@ -1,11 +1,11 @@
 <?php
-session_start();
-if (!isset($_SESSION['username'])) {
-  header('location: login.php');
-}
-else {
-  $username = $_SESSION['username'];
-}
+//session_start();
+// if (!isset($_SESSION['username'])) {
+  // header('location: login.php');
+// }
+// else {
+  // $username = $_SESSION['username'];
+// }
 
 try{
     $koneksi = new PDO("mysql:host=localhost;port=3306;dbname=project_12;","root","");
@@ -33,8 +33,8 @@ $row = $data->fetch(PDO::FETCH_OBJ);
 
 <ul>
   <li><a class="active" href="index.php">Home</a></li>
-  <li><a href="input.php">New Article</a></li>
-  <li><a href="guest-user/all-user.php">User</a></li>
+  <li><a href="input.php">Artikel Baru</a></li>
+  <li><a href="login.php">Login</a></li>
   <li><a href="logout.php">Logout</a></li>
 </ul>
 
@@ -54,11 +54,35 @@ $row = $data->fetch(PDO::FETCH_OBJ);
 </div>
 <table style="width: 100%;color: #fff; background-color: #616161;">
 <tr>
-<td><a class="button button-green" href="edit.php?id=<?=$row->id;?>">Edit</a></td>
-<td><a class="button button-red" onclick="return confirm('Sure want to delete <?=$row->judul;?> ?')" href="delete.php?id=<?=$row->id;?>">Delete</a></td>
+<td><a class="button button-green" href="edit.php?id=<?=$row->id;?>">Ubah</a></td>
+<td><a class="button button-red" onclick="return confirm('Sure want to delete <?=$row->judul;?> ?')" href="delete.php?id=<?=$row->id;?>">Hapus</a></td>
 </tr>
 </table></div>
 </div>
+
+<form method="POST" action="komentar/postkomentar.php">
+	<input type="hidden" name="id_artikel" value="<?=$row->id;?>">
+	<input type="hidden" name="komentator" value="<?=$_POST['username'];?>">
+	<table>
+		<tr>
+			<td><span style="color:blue;font-size: 25px;"></td>Komentar</span>
+			<td><textarea name="komentar" style="width:600px; height:150px;"></textarea></td>
+		</tr>
+		<tr>
+			<td<br></td>
+		</tr>
+		<tr>
+			<td><button name="submit" type="submit" class="button">Post</td>
+		</tr>
+	</table>
+</form>
+
+<br>
+<?php	
+	include'komentar/komentar.php';
+
+?>
+<br>
 
 </body>
 </html>
